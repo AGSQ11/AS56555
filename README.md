@@ -90,7 +90,7 @@ If you find that you need to make any adjustments to the templates, simply do so
 If you use this as a [GitHub Repository template](https://github.blog/2019-06-06-generate-new-repositories-with-repository-templates/), you will occassionally want to sync your version of the repository with the master one located at [neptune-networks/peering](https://github.com/neptune-networks/peering). To do this, you can run the following commands:
 
 ```
-git remote add upstream https://github.com/neptune-networks/peering.git
+git remote add upstream https://github.com/AndreiCojan/AS56555.git
 git fetch upstream
 git merge upstream/master --allow-unrelated-histories
 ```
