@@ -1,45 +1,3 @@
-# This is a sample configuration for a hypothetical border router running BIRD
-# 2.x. In this example, this border router is connected to DE-CIX NY, has a
-# direct connection to an upstream, exports routes to NLNOG RING's looking
-# glass, has telemetry being exported to pmacctd, and has an iBGP session to a
-# core router.
-#
-# The example network design is as follows:
-#
-#                                    ┌ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ┐
-#       ┌──────────────────┐             ┌───────────────────┐
-#       │ NLNOG RING (LG)  │         │   │   Google (Peer)   │ │
-#       │  82.94.230.130   ├────┐      ┌─┤   203.0.113.41    │
-#       │2001:888:2001::130│    │    │ │ │fd00:504:36::3b41:0│ │
-#       └──────────────────┘    │      │ └───────────────────┘
-#       ┌──────────────────┐    │    │ │ ┌───────────────────┐ │
-#       │  GTT (Upstream)  │    │      │ │Acme Inc (Customer)│
-#       │    192.0.2.1     │    │    │ ├─┤   203.0.113.220   │ │
-#       │fd00:169:254:2::2 │    │      │ │fd00:504:36:0:3:2:0│
-#       └─────────────┬────┘    │    │ │ └───────────────────┘ │
-#                     │         │      │              DE-CIX NY
-#                     │         │    └ ┼ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ┘
-#                ┌────┴─────────┴──────┴─────────┐
-#                │      BIRD (You are here)      │
-# ┌ ─ ─ ─ ─ ─ ─ ─│         198.51.100.1          │─ ─ ─ ─ ─ ─ ─
-#                │ 2001:db8::200:5eff:fe15:429e  │      AS65536│
-# │              └───────────────┬───────────────┘
-#                      ┌─────────┴────────────┐                │
-# │    ┌───────────────┴───────┐  ┌───────────┴───────────┐
-#      │      BIRD (Core)      │  │  pmacctd (Telemetry)  │    │
-# │    │      169.254.1.1      │  │       127.0.0.1       │
-#      │   fd00:169:254:1::1   │  │                       │    │
-# │    └───────────────────────┘  └───────────────────────┘
-#  ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ┘
-#
-# This example is meant to exercise as many parts of the configuration as
-# possible. Your network architecture might be much simpler. Feel free to omit
-# anything that isn't necessary for you.
-#
-# Each of the configuration options are explained below:
-
-
-
 # The public Autonomous System Number of the border router that this
 # configuration is running on.
 asn: 56555
@@ -161,3 +119,12 @@ bgp:
         remote:
           v4: '185.1.179.2'
           v6: '2001:7f8:fc:3f::2'
+      - description: 'ROPNIX_RC'
+        asn: 60113
+        #irr: 'AS-COLLECTOR'
+        # In some BGP sessions you may be required to use an MD5 password to
+        # authenticate.
+        #md5: '912ec803b2c'
+        remote:
+          v4: '185.1.179.254'
+          v6: '2001:7f8:fc:3f::254'
