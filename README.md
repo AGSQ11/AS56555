@@ -1,10 +1,5 @@
-# Neptune Networks Peering Config
-
-This is the pipeline to build [Neptune Networks](https://neptunenetworks.org)' BGP peering configuration. Neptune uses BIRD `2.0.7` on all of its core customer routers and border routers. We rely on this pipeline to take templates and YAML and turn them into a BIRD configuration.
-
-This BGP configuration has been built to be agnostic to Neptune Networks and should work for you as well. An example configuration file can be seen in [`config/router.fqdn.example.yml`](config/router.fqdn.example.yml). Simply create a similar file with the relevant options to your network and execute the generation steps at the bottom of this README.
-
-The YAML files in [`config/`](config/) go through a transformation step in which they turn into [`bird.conf`](out/router.fqdn.example/bird.conf), [`peers.conf`](out/router.fqdn.example/peers.conf), and [`static.conf`](out/router.fqdn.example/static.conf) files in the [`out/`](out/) directory.
+# AS56555 auto-bird configuration generator
+Forked from Neptune-Networks
 
 ## BGP Community Support
 
@@ -84,11 +79,7 @@ script/generate
 This will create a file for each of the templates defined in [`/templates`](templates/) without the `.erb` suffix in the [`out/`](out/) directory.
 
 If you find that you need to make any adjustments to the templates, simply do so and then re-run the generator.
-
-## Staying up to date
-
-If you use this as a [GitHub Repository template](https://github.blog/2019-06-06-generate-new-repositories-with-repository-templates/), you will occassionally want to sync your version of the repository with the master one located at [neptune-networks/peering](https://github.com/neptune-networks/peering). To do this, you can run the following commands:
-
+ 
 ```
 git remote add upstream https://github.com/AndreiCojan/AS56555.git
 git fetch upstream
