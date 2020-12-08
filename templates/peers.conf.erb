@@ -10,7 +10,7 @@ define PREFIX_WHITELIST_FOR_<%= session.asn -%>_<%= session.protocol_number -%> 
     <%- end -%>
 
   <%- end -%>
-protocol bgp <%= session_name(session) %> from <%= session_template_name(session) %> {
+protocol bgp <%= session.description %>_<%= session.protocol_number -%> from <%= session_template_name(session) %> {
   description "<%= session.description %>";
   local <%= local_address(session) %> as <%= config.asn %>;
   neighbor <%= remote_address(session) %> as <%= session.asn %>;

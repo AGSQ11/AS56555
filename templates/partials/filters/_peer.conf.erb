@@ -15,14 +15,7 @@
     };
 
   <%- end -%>
-    export filter {
-      <%- if session.communities&.export -%>
-        <%- export_communities(session).each do |community| -%>
-      <%= community %>
-        <%- end -%>
-      <%- end -%>
-      add_as_specific_prepends(<%= session.asn %>);
-      handle_as_specific_no_export(<%= session.asn %>);
-      peer_export();
+    export filter { 
+	  reject;
     };
   };
