@@ -81,7 +81,7 @@ This will create a file for each of the templates defined in [`/templates`](temp
 If you find that you need to make any adjustments to the templates, simply do so and then re-run the generator.
  
 ```
-git remote add upstream https://github.com/AndreiCojan/AS56555.git
+git remote add upstream https://github.com/AGSQ11/AS56555.git
 git fetch upstream
 git merge upstream/master --allow-unrelated-histories
 ```
