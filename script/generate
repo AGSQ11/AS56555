@@ -3,4 +3,4 @@
 docker run -it --rm --name peering \
   -v "$(pwd)/config:/peering/config" \
   -v "$(pwd)/out:/peering/out" \
-  AGSQ11/AS56555:latest $@
+  agsq11/as56555:latest $@
