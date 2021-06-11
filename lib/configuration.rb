@@ -53,6 +53,8 @@ class Configuration
         BGP::CustomerSessionCollection.new(config)
       when 'peers'
         BGP::PeerSessionCollection.new(config)
+      when 'collectors'
+        BGP::PeerSessionCollection.new(config)
       when 'telemetries'
         BGP::TelemetrySessionCollection.new(config)
       when 'looking_glasses'
