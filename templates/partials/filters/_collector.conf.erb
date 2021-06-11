@@ -1,10 +1,8 @@
   ipv<%= session.protocol_number %> {
-  <%- if session.irr || session.allowed_prefixes -%>
     import filter {
       reject;
     };
 
-  <%- end -%>
     export filter {
       rc_export();    
     };
