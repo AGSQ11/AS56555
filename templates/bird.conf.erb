@@ -536,6 +536,42 @@ function customer_import() {
   add_customer_community();
   default_import();
 }
+function rc_export() {
+  strip_private_asns();
+  add_global_prepends();
+
+  if is_own_prefix() then accept;
+
+  if route_is_rpki_invalid() then
+    reject "RPKI, route is INVALID - NOT ANNOUNCING ", net;
+
+  if is_own_internal_prefix() then {
+    if !prefix_is_in_global_whitelist() then
+      reject "prefix is our own and internal - NOT ANNOUNCING ", net;
+  }
+
+  if net.type = NET_IP4 then
+    if !is_prefix_length_valid(8, 24) then
+      reject "prefix len [", net.len, "] not in 8-24 - REJECTING ", net;
+
+  if net.type = NET_IP6 then
+    if !is_prefix_length_valid(12, 48) then
+      reject "prefix len [", net.len, "] not in 12-48 - REJECTING ", net;
+
+  if prefix_is_bogon() then
+    reject "prefix is bogon - NOT ANNOUNCING ", net;
+ 
+
+  if prefix_is_in_global_blacklist() then
+    reject "prefix is in global blacklist - REJECTING ", net;
+
+  if was_learned_from_peer() then accept;
+  if was_learned_from_private_peer() then accept;
+  if was_learned_from_upstream() then accept;
+  if was_learned_from_customer() then accept;
+
+  acdept;
+}
 
 function customer_export() {
   strip_private_asns();
