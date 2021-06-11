@@ -6,6 +6,7 @@ module BGP
   class UpstreamSession < BaseSession; end
   class CustomerSession < BaseSession; end
   class PeerSession < BaseSession; end
+  class CollectorSession < BaseSession; end
   class TelemetrySession < BaseSession; end
   class LookingGlassSession < BaseSession; end
 
@@ -30,6 +31,12 @@ module BGP
   class PeerSessionCollection < BaseCollection
     def initialize(attrs)
       super(attrs, session_class: PeerSession)
+    end
+  end
+  
+  class CollectorSessionCollection < BaseCollection
+    def initialize(attrs)
+      super(attrs, session_class: CollectorSession)
     end
   end
 
