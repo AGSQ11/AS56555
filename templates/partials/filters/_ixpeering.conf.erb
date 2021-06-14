@@ -1,9 +1,9 @@
   ipv<%= session.protocol_number %> { 
     import filter { 
-      ixp_import(); 
-};
-  <%- end -%>
-    export filter { 
+      ixp_import();
+    };
+ 
+    export filter {  
       upstream_export();
     };
   };
