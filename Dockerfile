@@ -1,6 +1,6 @@
 FROM ruby:2.7.1-slim-buster
 
-WORKDIR /peering
+WORKDIR /genbgp
 COPY . .
 
 RUN apt-get update && apt-get install -y \
