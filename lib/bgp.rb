@@ -43,7 +43,7 @@ module BGP
 
   class IxpSessionCollection < BaseCollection
     def initialize(attrs)
-      super(attrs, session_class: CollectorSession)
+      super(attrs, session_class: IxpSession)
     end
   end
 
