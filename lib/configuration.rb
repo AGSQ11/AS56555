@@ -55,8 +55,8 @@ class Configuration
         BGP::PeerSessionCollection.new(config)
       when 'collectors'
         BGP::CollectorSessionCollection.new(config)
-      when 'ixps'
-        BGP::IxpSessionCollection.new(config)
+      when 'ixpeerings'
+        BGP::IxpeeringSessionCollection.new(config)
       when 'telemetries'
         BGP::TelemetrySessionCollection.new(config)
       when 'looking_glasses'

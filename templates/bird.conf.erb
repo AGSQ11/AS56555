@@ -713,7 +713,7 @@ template bgp peer6 {
     export where peer_export();
   };
 }
-template bgp ixp4 {
+template bgp ixpeering4 {
   hold time 90;
   keepalive time 30;
   graceful restart;
@@ -727,7 +727,7 @@ template bgp ixp4 {
   };
 }
 
-template bgp ixp6 {
+template bgp ixpeering6 {
   hold time 90;
   keepalive time 30;
   graceful restart;
