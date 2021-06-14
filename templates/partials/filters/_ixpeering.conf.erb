@@ -1,18 +1,9 @@
-  ipv<%= session.protocol_number %> {
-  <%- if session.irr || session.allowed_prefixes -%>
+  ipv<%= session.protocol_number %> { 
     import filter { 
-      ixp_import();
-    };
+      ixp_import(); 
 
   <%- end -%>
-    export filter {
-      <%- if session.communities&.export -%>
-        <%- export_communities(session).each do |community| -%>
-      <%= community %>
-        <%- end -%>
-      <%- end -%>
-      add_as_specific_prepends(<%= session.asn %>);
-      handle_as_specific_no_export(<%= session.asn %>);
+    export filter { 
       upstream_export();
     };
   };
