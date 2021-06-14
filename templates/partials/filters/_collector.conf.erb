@@ -1,4 +1,13 @@
-  ipv<%= session.protocol_number %> {
+  ipv4 {
+    import filter {
+      reject;
+    };
+
+    export filter {
+      rc_export();    
+    };
+  };
+  ipv6 {
     import filter {
       reject;
     };
