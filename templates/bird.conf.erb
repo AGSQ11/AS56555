@@ -429,6 +429,44 @@ function default_import() {
   accept;
 }
 
+function ixp_import() {
+  if bgp_path.len > 32 then
+    reject "AS_PATH len [", bgp_path.len ,"] longer than 32 - REJECTING ", net;
+
+  if prefix_is_in_global_blacklist() then
+    reject "prefix is in global blacklist - REJECTING ", net;
+
+  if is_own_prefix() then
+    reject "prefix is our own - REJECTING ", net;
+
+  if is_own_internal_prefix() then {
+    if !prefix_is_in_global_whitelist() then
+      reject "prefix is our own and internal - REJECTING ", net;
+  }
+
+  if prefix_is_bogon() then
+    reject "prefix is bogon - REJECTING ", net;
+
+  if net.type = NET_IP4 then
+    if !is_prefix_length_valid(8, 24) then
+      reject "prefix len [", net.len, "] not in 8-24 - REJECTING ", net;
+
+  if net.type = NET_IP6 then
+    if !is_prefix_length_valid(12, 48) then
+      reject "prefix len [", net.len, "] not in 12-48 - REJECTING ", net;
+
+  perform_rpki_validation();
+
+  if route_is_rpki_invalid() then
+    reject "RPKI, route is INVALID - REJECTING ", net;
+
+  add_region_community();
+  add_site_community();
+  honor_graceful_shutdown();
+
+  accept;
+}
+
 function peer_import() {
   scrub_communities_in();
   add_peer_community();
