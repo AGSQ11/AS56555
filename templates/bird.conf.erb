@@ -713,6 +713,34 @@ template bgp peer6 {
     export where peer_export();
   };
 }
+template bgp ixp4 {
+  hold time 90;
+  keepalive time 30;
+  graceful restart;
+
+  ipv4 {
+    next hop self;
+
+    import keep filtered;
+    import filter { ixp_import(); };
+    export where upstream_export();
+  };
+}
+
+template bgp ixp6 {
+  hold time 90;
+  keepalive time 30;
+  graceful restart;
+
+  ipv6 {
+    next hop self;
+
+    import keep filtered;
+    import filter { ixp_import(); };
+    export where upstream_export();
+  };
+}
+
 template bgp collector4 {
   hold time 90;
   keepalive time 30;
